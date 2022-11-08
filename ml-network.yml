@@ -31,12 +31,15 @@ Metadata:
         width: 60
         height: 60
       position:
-        x: 150.86284229121392
-        'y': 187.55262948796346
+        x: 150
+        'y': 190
       z: 2
       parent: 33a3de5d-b555-410f-a991-a0e82cad1c19
       embeds: []
       iscontainedinside:
+        - 33a3de5d-b555-410f-a991-a0e82cad1c19
+        - 33a3de5d-b555-410f-a991-a0e82cad1c19
+        - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
@@ -61,6 +64,9 @@ Metadata:
       parent: a7fb93ab-2787-4cc5-898a-91829942d11e
       embeds: []
       iscontainedinside:
+        - a7fb93ab-2787-4cc5-898a-91829942d11e
+        - a7fb93ab-2787-4cc5-898a-91829942d11e
+        - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
@@ -107,9 +113,10 @@ Metadata:
       z: 2
       parent: ad757502-2d37-4018-8f9c-7a79032de362
       embeds: []
-      isassociatedwith:
-        - e1404648-1735-4aeb-8d34-f94a6cdd795e
       iscontainedinside:
+        - ad757502-2d37-4018-8f9c-7a79032de362
+        - ad757502-2d37-4018-8f9c-7a79032de362
+        - ad757502-2d37-4018-8f9c-7a79032de362
         - ad757502-2d37-4018-8f9c-7a79032de362
         - ad757502-2d37-4018-8f9c-7a79032de362
         - ad757502-2d37-4018-8f9c-7a79032de362
@@ -187,3 +194,26 @@ Resources:
         id: 5d56c931-7954-4a3b-836c-09c8224bb1d2
     DependsOn:
       - InternetGateway
+Parameters:
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t2.small
+    AllowedValues:
+      - t1.micro
+      - t2.nano
+      - t2.micro
+      - t2.small
+    ConstraintDescription: must be a valid EC2 instance type.
+  KeyName:
+    Description: Name of an EC2 KeyPair to enable SSH access to the instance.
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  SSHLocation:
+    Description: ' The IP address range that can be used to access the web server using SSH.'
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    Default: 0.0.0.0/0
+    AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
