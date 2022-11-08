@@ -3,26 +3,26 @@ Metadata:
   'AWS::CloudFormation::Designer':
     a7fb93ab-2787-4cc5-898a-91829942d11e:
       size:
-        width: 1400
-        height: 410
+        width: 750
+        height: 370
       position:
-        x: 50
-        'y': 20
+        x: 60
+        'y': 10
       z: 0
       embeds:
         - ad757502-2d37-4018-8f9c-7a79032de362
-        - 558a3a18-4431-44f7-815b-d523821bc7ca
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
     33a3de5d-b555-410f-a991-a0e82cad1c19:
       size:
-        width: 370
-        height: 310
+        width: 280
+        height: 220
       position:
-        x: 90
-        'y': 110
+        x: 100
+        'y': 100
       z: 1
       parent: a7fb93ab-2787-4cc5-898a-91829942d11e
       embeds:
+        - 558a3a18-4431-44f7-815b-d523821bc7ca
         - 4e977f92-96ce-49cb-a23b-277ec00a53d7
       dependson:
         - ad757502-2d37-4018-8f9c-7a79032de362
@@ -32,11 +32,15 @@ Metadata:
         height: 60
       position:
         x: 150
-        'y': 193
+        'y': 140
       z: 2
       parent: 33a3de5d-b555-410f-a991-a0e82cad1c19
       embeds: []
+      isassociatedwith:
+        - 558a3a18-4431-44f7-815b-d523821bc7ca
       iscontainedinside:
+        - 33a3de5d-b555-410f-a991-a0e82cad1c19
+        - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
         - 33a3de5d-b555-410f-a991-a0e82cad1c19
@@ -65,12 +69,13 @@ Metadata:
         width: 60
         height: 60
       position:
-        x: 840
-        'y': 247
-      z: 1
-      parent: a7fb93ab-2787-4cc5-898a-91829942d11e
+        x: 250
+        'y': 210
+      z: 2
+      parent: 33a3de5d-b555-410f-a991-a0e82cad1c19
       embeds: []
       iscontainedinside:
+        - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
         - a7fb93ab-2787-4cc5-898a-91829942d11e
@@ -111,8 +116,8 @@ Metadata:
         width: 250
         height: 190
       position:
-        x: 480
-        'y': 50
+        x: 490
+        'y': 40
       z: 1
       parent: a7fb93ab-2787-4cc5-898a-91829942d11e
       embeds:
@@ -122,8 +127,8 @@ Metadata:
         width: 60
         height: 60
       position:
-        x: 510
-        'y': 90
+        x: 520
+        'y': 80
       z: 2
       parent: ad757502-2d37-4018-8f9c-7a79032de362
       embeds: []
@@ -144,8 +149,16 @@ Metadata:
         - ad757502-2d37-4018-8f9c-7a79032de362
         - ad757502-2d37-4018-8f9c-7a79032de362
         - ad757502-2d37-4018-8f9c-7a79032de362
+        - ad757502-2d37-4018-8f9c-7a79032de362
+        - ad757502-2d37-4018-8f9c-7a79032de362
       dependson:
         - e1404648-1735-4aeb-8d34-f94a6cdd795e
+    82ec2c1f-a9b6-4b2e-b9c5-c83c56c37fea:
+      source:
+        id: 4e977f92-96ce-49cb-a23b-277ec00a53d7
+      target:
+        id: 558a3a18-4431-44f7-815b-d523821bc7ca
+      z: 3
 Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
@@ -171,13 +184,8 @@ Resources:
     Properties:
       NetworkInterfaces:
         - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
-        - SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 4e977f92-96ce-49cb-a23b-277ec00a53d7
@@ -216,7 +224,8 @@ Resources:
         id: d915f82c-fac3-45dd-bdbd-d61502560649
   PublicRouteTable:
     Type: 'AWS::EC2::RouteTable'
-    Properties: {}
+    Properties:
+      VpcId: !Ref VPC
     Metadata:
       'AWS::CloudFormation::Designer':
         id: ad757502-2d37-4018-8f9c-7a79032de362
@@ -254,3 +263,12 @@ Parameters:
     Default: 0.0.0.0/0
     AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
     ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+Outputs:
+  URL:
+    Value: !Join 
+      - ''
+      - - 'http://'
+        - !GetAtt 
+          - WebServerInstance
+          - PublicIp
+    Description: Newly created application URL
