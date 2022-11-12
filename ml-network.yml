@@ -173,6 +173,9 @@ Metadata:
         - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
         - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
         - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
+        - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
+        - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
+        - 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
       dependson:
         - ed1187c9-b9b1-44d5-adde-28022a7ab390
     db9ece04-20e1-46f4-9872-8b020d6cdee8:
@@ -186,6 +189,9 @@ Metadata:
       parent: 3d803e94-ba9b-492a-a657-4ea7ec91325c
       embeds: []
       iscontainedinside:
+        - 3d803e94-ba9b-492a-a657-4ea7ec91325c
+        - 3d803e94-ba9b-492a-a657-4ea7ec91325c
+        - 3d803e94-ba9b-492a-a657-4ea7ec91325c
         - 3d803e94-ba9b-492a-a657-4ea7ec91325c
         - 3d803e94-ba9b-492a-a657-4ea7ec91325c
         - 3d803e94-ba9b-492a-a657-4ea7ec91325c
@@ -442,6 +448,9 @@ Metadata:
         - bb2d970b-6804-4bd3-8257-fc82e91d13be
         - bb2d970b-6804-4bd3-8257-fc82e91d13be
         - bb2d970b-6804-4bd3-8257-fc82e91d13be
+        - bb2d970b-6804-4bd3-8257-fc82e91d13be
+        - bb2d970b-6804-4bd3-8257-fc82e91d13be
+        - bb2d970b-6804-4bd3-8257-fc82e91d13be
       dependson:
         - 16909b2a-5aa6-4803-ae99-28abe3f6b8c7
     f1ca425e-e8a1-436d-9594-ec72a54b787e:
@@ -455,6 +464,9 @@ Metadata:
       parent: 447b442a-f52b-44b8-9311-4f6841aa4638
       embeds: []
       iscontainedinside:
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
@@ -688,6 +700,9 @@ Metadata:
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
     19ce6f1a-11a9-4530-b3b2-c90f9708c7d6:
       size:
         width: 60
@@ -699,6 +714,9 @@ Metadata:
       parent: 447b442a-f52b-44b8-9311-4f6841aa4638
       embeds: []
       iscontainedinside:
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
@@ -968,6 +986,9 @@ Metadata:
         - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
         - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
         - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
+        - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
+        - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
+        - 9b5f6075-bee7-420a-82ae-9d93b41aba5b
       dependson:
         - 3bffda31-7397-4e8a-85b7-9795b32f0bce
     16909b2a-5aa6-4803-ae99-28abe3f6b8c7:
@@ -983,6 +1004,9 @@ Metadata:
       isassociatedwith:
         - 2553540c-08fd-4d47-86b6-9e72a7fea5fc
       iscontainedinside:
+        - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
+        - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
+        - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
         - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
         - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
         - 8d1bcccd-43e9-45f6-8b6f-2319c3f5cf24
@@ -1163,6 +1187,9 @@ Metadata:
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
         - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
+        - 447b442a-f52b-44b8-9311-4f6841aa4638
     e8ee5c79-ccac-4450-bb30-e92d4df49269:
       size:
         width: 60
@@ -1174,6 +1201,9 @@ Metadata:
       parent: c594797c-b69b-464b-9e25-72ea0a30984e
       embeds: []
       iscontainedinside:
+        - c594797c-b69b-464b-9e25-72ea0a30984e
+        - c594797c-b69b-464b-9e25-72ea0a30984e
+        - c594797c-b69b-464b-9e25-72ea0a30984e
         - c594797c-b69b-464b-9e25-72ea0a30984e
         - c594797c-b69b-464b-9e25-72ea0a30984e
         - c594797c-b69b-464b-9e25-72ea0a30984e
@@ -1258,26 +1288,6 @@ Resources:
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
           SubnetId: !Ref PublicSubnet
-      UserData:
-        'Fn::Base64': >
-          #!/bin/bash yum update -y amazon-linux-extras install -y nginx
-          systemctl start nginx systemctl enable nginx sudo ufw allow 'Nginx
-          Full' sudo ufw reload usermod -a -G nginx ec2-user
-
-          chown -R ec2-user:nginx /usr/share/nginx/html
-
-          chmod 2775 /usr/share/nginx/html
-
-          find /usr/share/nginx/html -type d -exec sudo chmod 2775 {} \;
-
-          find /usr/share/nginx/html -type f -exec sudo chmod 0664 {} \;
-
-          echo "<html><h1>JumpBox in CloudFormation</h1><p>Welcome to ML
-          Network</html>" > /usr/share/nginx/html/index.html
-
-          systemctl stop nginx
-
-          systemctl start nginx
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 9b1c27c6-0f15-4272-bebc-079918f038ae
@@ -1348,6 +1358,10 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: !Ref SSHLocation
+        - IpProtocol: icmp
+          FromPort: 8
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
     Metadata:
       'AWS::CloudFormation::Designer':
         id: f1ca425e-e8a1-436d-9594-ec72a54b787e
@@ -1508,7 +1522,9 @@ Parameters:
     Type: 'AWS::EC2::KeyPair::KeyName'
     ConstraintDescription: Must be the name of an existing EC2 KeyPair.
   SSHLocation:
-    Description: ' The IP address range that can be used to access the web app server using SSH.'
+    Description: >-
+      The IP address range that can be used to access the web app server using
+      SSH.
     Type: String
     MinLength: '9'
     MaxLength: '18'
