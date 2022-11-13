@@ -1567,6 +1567,7 @@ Metadata:
 Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
+    # virtual private cloud with a choosen set of ip address, and dns resolution support provided by aws
     Properties:
       EnableDnsSupport: 'true'
       EnableDnsHostnames: 'true'
@@ -1579,6 +1580,7 @@ Resources:
         id: 447b442a-f52b-44b8-9311-4f6841aa4638
   PublicSubnet:
     Type: 'AWS::EC2::Subnet'
+    # public subnet deployed in the us-east-1a az, jumpbox will be initiated
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.1.10.0/24
@@ -1588,6 +1590,7 @@ Resources:
         id: 66b9b9b5-f67d-4240-b34e-eca76e8d24cf
   PrivateSubnet:
     Type: 'AWS::EC2::Subnet'
+    # private subnet deployed in the us-east-1b az, database will be initiated
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.1.30.0/24
@@ -1597,16 +1600,19 @@ Resources:
         id: 3d803e94-ba9b-492a-a657-4ea7ec91325c
   JumpBox:
     Type: 'AWS::EC2::Instance'
+    # jumbox that will be used to access the other instances, image id added as a mapping based to its zone
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !FindInMap 
         - RegionMap
         - !Ref 'AWS::Region'
         - AMI1
+      # key name created in advance, option to choose a specific one from the stack creation gui
       KeyName: !Ref KeyName
       Tags:
         - Key: Name
           Value: JumpBox
+      # connection ruled by the jumpbox security group, public ip associated on creation, depends on the public route
       NetworkInterfaces:
         - GroupSet:
             - !Ref SGJB
@@ -1614,20 +1620,6 @@ Resources:
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
           SubnetId: !Ref PublicSubnet
-      UserData:
-        'Fn::Base64': |
-          #!/bin/bash
-          yum update -y
-          amazon-linux-extras install -y httpd
-          yum install -y php
-          systemctl start httpd
-          systemctl enable httpd
-          usermod -a -G apache ec2-user
-          chown -R ec2-user:apache /var/www
-          chmod 2775 /var/www
-          find /var/www -type d -exec sudo chmod 2775 {} \;
-          find /var/www -type f -exec sudo chmod 0664 {} \;
-          echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 9b1c27c6-0f15-4272-bebc-079918f038ae
@@ -1635,16 +1627,19 @@ Resources:
       - PublicRoute
   WebApp:
     Type: 'AWS::EC2::Instance'
+    # webapp that will connect to the database server, image id added as a mapping based to its zone
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !FindInMap 
         - RegionMap
         - !Ref 'AWS::Region'
         - AMI1
+      # key name created in advance, option to choose a specific one from the stack creation gui
       KeyName: !Ref KeyName
       Tags:
         - Key: Name
           Value: WebApp
+      # connection ruled by the webapp security group, public ip associated on creation, depends on the private route
       NetworkInterfaces:
         - GroupSet:
             - !Ref SGWA
@@ -1659,6 +1654,7 @@ Resources:
       - PrivateRoute
   Database:
     Type: 'AWS::EC2::Instance'
+    # database server that will it accept connection only from the webapp server, image id added as a mapping based to its zone
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !FindInMap 
@@ -1669,6 +1665,7 @@ Resources:
       Tags:
         - Key: Name
           Value: Database
+      # connection ruled by the database security group, public ip associated on creation, depends on the private route
       NetworkInterfaces:
         - GroupSet:
             - !Ref SGDB
@@ -1683,6 +1680,7 @@ Resources:
       - PrivateRoute
   PrivateSubnet1:
     Type: 'AWS::EC2::Subnet'
+    # private subnet1 deployed in the us-east-1c az, webapp will be initiated
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.1.40.0/24
@@ -1692,6 +1690,7 @@ Resources:
         id: bb2d970b-6804-4bd3-8257-fc82e91d13be
   SGJB:
     Type: 'AWS::EC2::SecurityGroup'
+    # jumpbox security group rules the inbound rules for tcp and ssh ip location selected on stack creation, also allowing ping
     Properties:
       VpcId: !Ref VPC
       GroupDescription: Allow access from HTTP and SSH traffic
@@ -1713,6 +1712,7 @@ Resources:
         id: f1ca425e-e8a1-436d-9594-ec72a54b787e
   SGWA:
     Type: 'AWS::EC2::SecurityGroup'
+    # webapp security group rules the inbound rules for tcp from the appserver only
     Properties:
       VpcId: !Ref VPC
       GroupDescription: Allow access from HTTP and SSH traffic
@@ -1730,6 +1730,7 @@ Resources:
         id: 505c334a-d72c-4fa8-9d00-780a4df6bda4
   SGDB:
     Type: 'AWS::EC2::SecurityGroup'
+    # database security group rules the inbound rules for tcp from the webapp only
     Properties:
       VpcId: !Ref VPC
       GroupDescription: Allow access from HTTP and SSH traffic
@@ -1747,6 +1748,7 @@ Resources:
         id: 19ce6f1a-11a9-4530-b3b2-c90f9708c7d6
   InternetGateway:
     Type: 'AWS::EC2::InternetGateway'
+    # ig to allow instances to be seen in the vpc
     Properties: {}
     Metadata:
       'AWS::CloudFormation::Designer':
@@ -1755,6 +1757,7 @@ Resources:
       - VPC
   VPCGatewatAttachment:
     Type: 'AWS::EC2::VPCGatewayAttachment'
+    # attaching gateway to vpc
     Properties:
       VpcId: !Ref VPC
       InternetGatewayId: !Ref InternetGateway
@@ -1763,6 +1766,7 @@ Resources:
         id: 3bffda31-7397-4e8a-85b7-9795b32f0bce
   PublicRouteTable:
     Type: 'AWS::EC2::RouteTable'
+    # public route table for jumpbox and appserver
     Properties:
       VpcId: !Ref VPC
     Metadata:
@@ -1772,6 +1776,7 @@ Resources:
       - PublicSubnet
   PrivateRouteTable:
     Type: 'AWS::EC2::RouteTable'
+    # private route table for webapp and database server
     Properties:
       VpcId: !Ref VPC
     Metadata:
@@ -1782,6 +1787,7 @@ Resources:
       - PrivateSubnet
   PublicRoute:
     Type: 'AWS::EC2::Route'
+    # public route for jumpbox and appserver, depend on gateway attachment
     Properties:
       DestinationCidrBlock: 0.0.0.0/0
       RouteTableId: !Ref PublicRouteTable
@@ -1793,6 +1799,7 @@ Resources:
       - VPCGatewatAttachment
   PrivateRoute:
     Type: 'AWS::EC2::Route'
+    # private route for webapp, database server, and nat gateway
     Properties:
       RouteTableId: !Ref PrivateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
@@ -1802,6 +1809,7 @@ Resources:
         id: 16909b2a-5aa6-4803-ae99-28abe3f6b8c7
   NatGateway:
     Type: 'AWS::EC2::NatGateway'
+    # nat gateway to allow instances on the private subnets been seen by the other instances
     Properties:
       AllocationId: !GetAtt ElasticIPAddress.AllocationId
       SubnetId: !Ref PublicSubnet
@@ -1810,6 +1818,7 @@ Resources:
         id: 2553540c-08fd-4d47-86b6-9e72a7fea5fc
   ElasticIPAddress:
     Type: 'AWS::EC2::EIP'
+    # allocated elastic ip address to be used for nat gateway
     Properties:
       Domain: VPC
     Metadata:
@@ -1817,6 +1826,7 @@ Resources:
         id: 818a8a3e-ad9c-488d-b273-d5e5c7e5579c
   PublicSubnet1:
     Type: 'AWS::EC2::Subnet'
+    # public subnet1 deployed in the us-east-1d az, appserver will be initiated
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.1.20.0/24
@@ -1826,6 +1836,7 @@ Resources:
         id: c594797c-b69b-464b-9e25-72ea0a30984e
   AppServer:
     Type: 'AWS::EC2::Instance'
+    # app server that will it accept connection only from the jumpbox server, image id added as a mapping based to its zone
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !FindInMap 
@@ -1836,6 +1847,7 @@ Resources:
       Tags:
         - Key: Name
           Value: AppServer
+      # connection ruled by the appserver security group, public ip associated on creation, depends on the public route
       NetworkInterfaces:
         - GroupSet:
             - !Ref SGAS
@@ -1850,6 +1862,7 @@ Resources:
       - PublicRoute
   SGAS:
     Type: 'AWS::EC2::SecurityGroup'
+    # appserver security group rules the inbound rules for tcp from the jumpbox only
     Properties:
       VpcId: !Ref VPC
       GroupDescription: Allow access from HTTP and SSH traffic
